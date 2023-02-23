@@ -38,8 +38,6 @@ class _MyAppState extends State<MyApp> {
           onPressed: () {
             GallerySaver.saveImage(newPhoto!.path);
             print("saved");
-
-            // GallerySaver.saveImage(compressedPhoto!.path).then((String path) {print("object"),    });
           },
           label: Row(
             children: [Icon(Icons.save), Text('Save in Gallery')],
@@ -52,34 +50,17 @@ class _MyAppState extends State<MyApp> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // TextButton(
-                //     onPressed: () async {
-                //      await compressImagesFlutter
-                //           .rotateImage(compressedPhoto!.path);
-                //       imageCache.clearLiveImages();
-                //       imageCache.clear();
-                //       setState(() {});
-                //     },
-                //     child: const Text('Rotate')),
-                // TextButton(
-                //     onPressed: () async {
-                //       photo = await _picker.pickImage(
-                //           source: ImageSource.camera, maxWidth: 1600);
-                //       newPhoto = File(photo!.path);
-                //       compressedPhoto = await compressImagesFlutter
-                //           .compressImage(photo!.path, quality: 30);
-                //       photoLengthCompressed =
-                //           (((compressedPhoto!.readAsBytesSync().lengthInBytes) *
-                //                       1.0) /
-                //                   1024) /
-                //               1024;
-                //       photoLengthNormal =
-                //           (((newPhoto!.readAsBytesSync().lengthInBytes) * 1.0) /
-                //                   1024) /
-                //               1024;
-                //       setState(() {});
-                //     },
-                //     child: const Text("Take Photo")),
+                InkWell(
+                  onTap: () {},
+                  child: Image(
+                    fit: BoxFit.fill,
+                    height: 255,
+                    width: 255,
+                    image: newPhoto == null
+                        ? AssetImage('assets/add-image.png')
+                        : FileImage(newPhoto),
+                  ),
+                ),
                 TextButton(
                     onPressed: () async {
                       photo = await _picker.pickImage(
@@ -90,18 +71,24 @@ class _MyAppState extends State<MyApp> {
                       //   print('noimage');
                       // }
                       newPhoto = File(photo!.path);
-                      compressedPhoto = await compressImagesFlutter
-                          .compressImage(photo!.path, quality: 30);
-                      photoLengthCompressed =
-                          (((compressedPhoto!.readAsBytesSync().lengthInBytes) *
-                                      1.0) /
-                                  1024) /
-                              1024;
-                      photoLengthNormal =
-                          (((newPhoto!.readAsBytesSync().lengthInBytes) * 1.0) /
-                                  1024) /
-                              1024;
-                      setState(() {});
+                      if (compressedPhoto != null) {
+                        compressedPhoto = await compressImagesFlutter
+                            .compressImage(photo!.path, quality: 30);
+                        photoLengthCompressed = (((compressedPhoto!
+                                        .readAsBytesSync()
+                                        .lengthInBytes) *
+                                    1.0) /
+                                1024) /
+                            1024;
+                        photoLengthNormal =
+                            (((newPhoto!.readAsBytesSync().lengthInBytes) *
+                                        1.0) /
+                                    1024) /
+                                1024;
+                        setState(() {});
+                      } else {
+                        print('noimage');
+                      }
                     },
                     child: const Text("Galery Photo")),
                 Text(
