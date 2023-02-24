@@ -33,14 +33,7 @@ class _compresState extends State<compres> {
             var snackBar = SnackBar(content: Text('Save in Gallery'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           } else {
-            var snackBar = SnackBar(
-              content: Text('select image'),
-              duration: Duration(seconds: 60, milliseconds: 500),
-              margin: EdgeInsets.only(
-                left: 10,
-                right: 10,
-              ),
-            );
+            var snackBar = SnackBar(content: Text('Select img'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },
@@ -62,7 +55,7 @@ class _compresState extends State<compres> {
                     source: ImageSource.gallery,
                   );
                   setState(() {});
-                  if (newPhoto != null) {
+                  if (photo != null) {
                     newPhoto = File(photo!.path);
                     compressedPhoto = await compressImagesFlutter
                         .compressImage(photo!.path, quality: 30);
@@ -75,20 +68,6 @@ class _compresState extends State<compres> {
                         (((newPhoto!.readAsBytesSync().lengthInBytes) * 1.0) /
                                 1024) /
                             1024;
-                  }
-                  if (newPhoto == compressedPhoto) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: const Text('its comopressed before'),
-                        duration: Duration(seconds: 3, milliseconds: 500),
-                        behavior: SnackBarBehavior.floating,
-                        margin: EdgeInsets.only(
-                          bottom: 100,
-                          left: 10,
-                          right: 10,
-                        ),
-                      ),
-                    );
                   } else {
                     print("no image");
                   }
