@@ -122,15 +122,18 @@ class _compresState extends State<compres> {
             )
           : null,
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.redAccent,
         onPressed: () {
           if (newPhoto != null) {
             GallerySaver.saveImage(newPhoto!.path);
             print("saved");
             var snackBar = SnackBar(content: Text('Save in Gallery'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            _showInterstitialAd();
           } else {
-            var snackBar = SnackBar(content: Text('Select img'));
+            var snackBar = SnackBar(content: Text('Choose photos'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            _showInterstitialAd();
           }
         },
         label: Row(
@@ -138,7 +141,8 @@ class _compresState extends State<compres> {
         ),
       ),
       appBar: AppBar(
-        title: const Text('Compress image'),
+        title: const Text('Compressed images'),
+        backgroundColor: Colors.redAccent,
         centerTitle: true,
       ),
       body: Center(
@@ -147,6 +151,7 @@ class _compresState extends State<compres> {
             children: [
               InkWell(
                 onTap: () async {
+                  // _showInterstitialAd();
                   photo = await _picker.pickImage(
                     source: ImageSource.gallery,
                   );
@@ -175,13 +180,14 @@ class _compresState extends State<compres> {
                     image: AssetImage("assets/add-image.png")),
               ),
               if (compressedPhoto != null)
-                Image.file(
-                  compressedPhoto!,
-                  key: UniqueKey(),
+                Container(
+                  height: 222,
+                  width: 222,
+                  child: Image.file(
+                    compressedPhoto!,
+                    key: UniqueKey(),
+                  ),
                 ),
-              const SizedBox(
-                height: 20.0,
-              ),
             ],
           ),
         ),
