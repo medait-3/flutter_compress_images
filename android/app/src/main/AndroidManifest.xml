@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.imagecomp">
+    package="com.me.imageresizer.imagecompressor">
    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
    <application
-        android:label="imagecomp"
+        android:label="image compress"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

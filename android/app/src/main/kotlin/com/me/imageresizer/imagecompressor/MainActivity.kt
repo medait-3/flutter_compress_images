@@ -1,4 +1,4 @@
-package com.example.imagecomp
+package com.me.imageresizer.imagecompressor
 
 import io.flutter.embedding.android.FlutterActivity
 
